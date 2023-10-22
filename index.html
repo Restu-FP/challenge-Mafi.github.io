@@ -3,34 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Upgrade</title>
+    <title>Kalkulator Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin: 0 auto;
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input, label, button {
+            margin: 5px;
+        }
+        label {
+            font-weight: bold;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+        #hasil {
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Kalkulator Upgrade</h2>
-    <input id="input1" />
-    <select id="operator">
-        <option value="+">+</option>
-        <option value="-">-</option>
-        <option value="*">x</option>
-        <option value="/">:</option>
-        <option value="%">%</option>
-    </select>
-    <input id="input2" />
-    <button onclick="hitung()">Hitung</button>
-    <br>
-    <label>Hasil: <span id="hasil">?</span></label>
+    <div class="container">
+        <h1>Kalkulator Sederhana</h1>
+        <input id="input1" placeholder="Angka pertama" />
+        <input type="radio" name="operator" value="+">
+        <label>+</label>
+
+        <input type="radio" name="operator" value="-">
+        <label>-</label>
+
+        <input type="radio" name="operator" value="*">
+        <label>x</label>
+
+        <input type="radio" name="operator" value="/">
+        <label>:</label>
+
+        <input type="radio" name="operator" value="%">
+        <label>%</label>
+
+        <input id="input2" placeholder="Angka kedua" />
+        <button onclick="hitung()">Hitung</button>
+        <br>
+        <label>Hasil: <span id="hasil">?</span></label>
+    </div>
     
     <script>
         function hitung() {
             let input1 = document.getElementById("input1").value;
             let input2 = document.getElementById("input2").value;
-            let operator = document.getElementById("operator").value;
-            let hasil;
+            let operatorElements = document.getElementsByName("operator");
+            let operator;
 
             input1 = parseInt(input1);
             input2 = parseInt(input2);
 
-            if (!isNaN(input1) && !isNaN(input2)) {
+            for (let i = 0; i < operatorElements.length; i++) {
+                if (operatorElements[i].checked) {
+                    operator = operatorElements[i].value;
+                    break;
+                }
+            }
+
+            if (!isNaN(input1) && !isNaN(input2) && operator) {
+                let hasil;
                 switch (operator) {
                     case '+':
                         hasil = input1 + input2;
@@ -42,19 +91,18 @@
                         hasil = input1 * input2;
                         break;
                     case '/':
-                        hasil = input1 / input2;
+                            hasil = input1 / input2;
                         break;
                     case '%':
                             hasil = input1 % input2;
                         break;
                     default:
-                        hasil = "Gitu doang sih";
+                        hasil = "Operator tidak valid";
                 }
+                document.getElementById("hasil").innerText = hasil;
             } else {
-                hasil = "Input invalid";
+                document.getElementById("hasil").innerText = "Input invalid";
             }
-
-            document.getElementById("hasil").innerText = hasil;
         }
     </script>
 </body>
