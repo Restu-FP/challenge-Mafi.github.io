@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+</head>
+<style>
+    .tengah{
+        margin: auto;
+        text-align: center;
+        padding: 20px;
+    }
+    input{
+        border-radius: 5px; 
+        padding: 10px; 
+        outline: none; 
+        border: 1px solid #ccc;
+    }
+    select{
+        border-radius: 5px; 
+        padding: 10px; 
+        outline: none; 
+        border: 1px solid #ccc;
+    }
+</style>
+<body>
+    <div class="tengah">
+        <h2>Kalkulator Sederhana</h2>
+    <input id="input1" />
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+    </select>
+    <input id="input2" />
+    <button onclick="hitung()">Hitung</button>
+    <br>
+    <br><br>
+    <label id="hasil" style="font-size: 20px;">Hasil</label>
+</div>
+    <script>
+        function hitung() {
+            let input1 = document.getElementById("input1").value;
+            let input2 = document.getElementById("input2").value;
+            let operator = document.getElementById("operator").value;
+            let hasil;
+
+            input1 = parseInt(input1);
+            input2 = parseInt(input2);
+
+            if (!isNaN(input1) && !isNaN(input2)) {
+                if (operator == '+') {
+                    hasil = input1 + input2;
+                } else if (operator == '-') {
+                    hasil = input1 - input2;
+                } else if (operator == '*') {
+                    hasil = input1 * input2;
+                } else if (operator == '/') {
+                        hasil = input1 / input2;
+                } else if (operator == '%') {
+                        hasil = input1 % input2;
+                } else {
+                    hasil = "Operator tidak tersedia";
+                }
+            } else {
+                hasil = "Input invalid";
+            }
+
+            document.getElementById("hasil").innerText = hasil;
+        }
+    </script>
+</body>
+</html>
